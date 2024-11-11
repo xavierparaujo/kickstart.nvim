@@ -235,6 +235,12 @@ require('lazy').setup({
   'pixelneo/vim-python-docstring',
   'preservim/nerdtree',
   {
+    "andrewferrier/wrapping.nvim",
+    config = function()
+      require("wrapping").setup()
+    end
+  },
+  {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
     opts = {},
