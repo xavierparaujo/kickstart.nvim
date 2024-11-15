@@ -283,6 +283,9 @@ require('lazy').setup({
               command = { 'ipython', '--no-autoindent' },
               format = require('iron.fts.common').bracketed_paste_python,
             },
+            Rscript = {
+              command = { 'Rscript', '-e' },
+            },
           },
           -- How the repl window will be displayed
           -- See below for more information
@@ -938,12 +941,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'catppuccin-frappe'
       --
       -- Override the background color and other highlight groups
-      vim.cmd('highlight Normal guibg=#000000')
-      vim.cmd('highlight LineNr guibg=#000000')
-      vim.cmd('highlight CursorLineNr guibg=#000000')
-      vim.cmd('highlight SignColumn guibg=#000000')
-      vim.cmd('highlight StatusLine guibg=#000000')
-      vim.cmd('highlight VertSplit guibg=#000000')
+      vim.cmd([[highlight Normal guibg=none]])
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
@@ -1117,6 +1115,9 @@ end)
 vim.keymap.set('n', '<A-j>', function()
   harpoon:list():next()
 end)
+
+-- normal paste remap
+vim.keymap.set('x', 'p', 'P', { noremap = true })
 
 -- REFACTORING
 -- Remap for refactoring
