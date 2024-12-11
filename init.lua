@@ -296,7 +296,7 @@ require('lazy').setup({
         keymaps = {
           send_motion = '<space>sc',
           visual_send = '<space>sc',
-          send_file = '<space>rc',
+          send_file = '<space>sf',
           send_line = '<space>sl',
           send_paragraph = '<space>sp',
           send_until_cursor = '<space>su',
@@ -332,6 +332,27 @@ require('lazy').setup({
     },
     config = function()
       require('refactoring').setup()
+    end,
+  },
+  {
+    "GCBallesteros/NotebookNavigator.nvim",
+    keys = {
+      { "]h", function() require("notebook-navigator").move_cell "d" end },
+      { "[h", function() require("notebook-navigator").move_cell "u" end },
+      { "<leader>X", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+      { "<leader>x", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+    },
+    dependencies = {
+      "echasnovski/mini.comment",
+      "hkupty/iron.nvim", -- repl provider
+      -- "akinsho/toggleterm.nvim", -- alternative repl provider
+      -- "benlubas/molten-nvim", -- alternative repl provider
+      "anuvyklack/hydra.nvim",
+    },
+    event = "VeryLazy",
+    config = function()
+      local nn = require "notebook-navigator"
+      nn.setup({ activate_hydra_keys = "<leader>h" })
     end,
   },
   -- NOTE: Plugins can also be added by using a table,
@@ -1141,9 +1162,10 @@ vim.keymap.set('n', '<space>rr', '<cmd>IronRestart<cr>')
 vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
 vim.keymap.set('n', '<space>rh', '<cmd>IronHide<cr>')
 
-
 -- NERDTREE
 --nnoremap <leader>n :NERDTreeFocus<CR>
 -- vim.keymap.set('n', '<leader>n', '<cmd>NERDTree<cr>')
 vim.keymap.set('n', '<leader>t', '<cmd>NERDTreeToggle<cr>')
 vim.keymap.set('n', '<leader>f', '<cmd>NERDTreeFind<cr>')
+
+
